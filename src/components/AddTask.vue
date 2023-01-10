@@ -21,11 +21,14 @@
           v-for="(task, index) in tasks"
           :key="index"
           class="flex mb-3 justify-between items-center p-2 border-2 border-gray-300 rounded-lg"
-          :class="
-            (task.completed ? 'bg-green-200' : 'bg-red-200',
-            noteModal ? 'opacity-50' : 'opacity-100')
-          "
+          :class="{
+            'bg-green-200': task.completed,
+            'bg-red-200': !task.completed,
+            'opacity-50': noteModal,
+            'opacity-100': !noteModal,
+          }"
         >
+          <!-- FIX PROBLEME CSS AU DESSUS -->
           <div>{{ task.name }}</div>
           <button
             class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
@@ -76,9 +79,9 @@
       </div>
       <div
         v-if="noteDivOpen"
-        class="h-full w-full absolute z-10 bg-blue-500 flex justify-between items-center flex-col"
+        class="h-full w-full absolute z-10 bg-blue-500/80 flex justify-between items-center flex-col"
       >
-        <div class="text-white mt-6">
+        <div class="text-white mt-6 font-bold text-xl">
           {{ actualNote }}
         </div>
 
